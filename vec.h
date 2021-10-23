@@ -7,12 +7,10 @@
 #include <assert.h>
 
 
-class vec {
+struct vec {
 
 	
 	int m, n;
-	
-	public:
 
 	int * items;
 
@@ -25,9 +23,8 @@ class vec {
 
 	void scale(vec & vector, const int newM, const int newN);
 	
-	// DEFAULT CONTSTRUCTORS
-	explicit vec();
-	explicit vec(const int & sm, const int & sn, const int *sitems = nullptr);
+	// DEFAULT CONTSTRUCTOR	
+	explicit vec(const int & sm = 1, const int & sn = 1, const int *sitems = nullptr);
 			
 
 	//DESTRUCTOR
@@ -38,6 +35,10 @@ class vec {
 
 	// OVERLOADED COPY ASSIGNMENT OPERATOR
 	vec & operator= (const vec & other);
+
+	// MOVE CONSTRUCTOR
+	vec(vec && other);
+	vec & operator= (vec && other);
 
 	// BOOLEAN CHECKERS
 	bool operator== (const vec & other);
@@ -70,7 +71,7 @@ class vec {
 	vec & operator*= (const int other);
 
 	// MATRIX METHODS
-	vec transpose(const vec & vector);
+	vec transpose();
 	int det(const vec & vector);	
 
 
@@ -90,8 +91,6 @@ vec & operator-= (const int left, const vec & other);
 vec & operator*= (const int left, const vec & other);
 
 // Reads input, allocates and returns a new vec object.
-vec readVec(const int m, const int n);
-
 std::ostream &operator<< (std::ostream &out, const vec & vector);
 
 
